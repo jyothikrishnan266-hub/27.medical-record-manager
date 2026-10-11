@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediTrack - Medical Record Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>✚ MediTrack</h2>
+    <p class="side-label">MAIN MENU</p>
+    <a href="#dashboard">▦ Dashboard</a>
+    <a href="#patients">👥 Patients</a>
+    <a href="#medical-records">📋 Medical Records</a>
+    <a href="#appointments">📅 Appointments</a>
+    <div class="side-footer">Medical Record Manager<br>
+      <small>Care organized, records simplified.</small>
+    </div>
+  </aside>
+
+  <main class="main" id="dashboard">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">HEALTHCARE MANAGEMENT</p>
+        <h1>Medical Record Manager</h1>
+        <p class="muted">Manage patient information and visit history.</p>
+      </div>
+      <button class="btn" id="addPatientBtn">+ Add Patient</button>
+    </header>
+
+    <section class="stats">
+      <article class="stat-card">
+        <div class="stat-icon">👥</div>
+        <p>Total Patients</p>
+        <h2 id="totalPatients">0</h2>
+      </article>
+      <article class="stat-card">
+        <div class="stat-icon">📋</div>
+        <p>Medical Records</p>
+        <h2 id="totalRecords">0</h2>
+      </article>
+      <article class="stat-card">
+        <div class="stat-icon">📅</div>
+        <p>Upcoming Appointments</p>
+        <h2 id="totalAppointments">0</h2>
+      </article>
+    </section>
+
+    <section class="panel" id="patients">
+      <div class="section-heading">
+        <div>
+          <h2>Patient Management</h2>
+          <p class="muted">Register and manage patient details.</p>
+        </div>
+      </div>
+
+      <form id="patientForm" class="form-grid">
+        <div>
+          <label for="patientName">Full Name *</label>
+          <input id="patientName" maxlength="100" required
+            placeholder="Enter patient name">
+        </div>
+        <div>
+          <label for="patientAge">Age *</label>
+          <input id="patientAge" type="number" min="0" max="120"
+            required placeholder="Age">
+        </div>
+        <div>
+          <label for="patientGender">Gender</label>
+          <select id="patientGender">
+            <option value="Not specified">Prefer not to specify</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="patientPhone">Phone Number</label>
+          <input id="patientPhone" type="tel" maxlength="20"
+            placeholder="Contact number">
+        </div>
+        <div class="full">
+          <label for="patientEmail">Email</label>
+          <input id="patientEmail" type="email" maxlength="150"
+            placeholder="Email address">
+        </div>
+        <button class="btn full" type="submit">Register Patient</button>
+      </form>
+
+      <div class="toolbar">
+        <input id="patientSearch" type="search"
+          placeholder="Search by patient name or ID...">
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Phone</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="patientTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="medical-records">
+      <div class="section-heading">
+        <div>
+          <h2>Medical Records</h2>
+          <p class="muted">Record diagnoses, visit details, and prescriptions.</p>
+        </div>
+      </div>
+
+      <form id="recordForm" class="form-grid">
+        <div class="full">
+          <label for="recordPatient">Select Patient *</label>
+          <select id="recordPatient" required>
+            <option value="">Select a patient</option>
+          </select>
+        </div>
+        <div>
+          <label for="visitDate">Visit Date *</label>
+          <input id="visitDate" type="date" required>
+        </div>
+        <div>
+          <label for="doctorName">Doctor Name</label>
+          <input id="doctorName" maxlength="100"
+            placeholder="Doctor's name">
+        </div>
+        <div class="full">
+          <label for="diagnosis">Diagnosis / Visit Notes *</label>
+          <textarea id="diagnosis" maxlength="2000" required
+            placeholder="Enter diagnosis or visit notes"></textarea>
+        </div>
+        <div class="full">
+          <label for="prescription">Prescription / Treatment Notes</label>
+          <textarea id="prescription" maxlength="2000"
+            placeholder="Enter prescribed treatment details"></textarea>
+        </div>
+        <button class="btn full" type="submit">+ Save Medical Record</button>
+      </form>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Record ID</th>
+              <th>Patient</th>
+              <th>Visit Date</th>
+              <th>Doctor</th>
+              <th>Diagnosis / Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="recordTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="appointments">
+      <div class="section-heading">
+        <div>
+          <h2>Appointments</h2>
+          <p class="muted">Schedule and track patient visits.</p>
+        </div>
+      </div>
+
+      <form id="appointmentForm" class="form-grid">
+        <div class="full">
+          <label for="appointmentPatient">Patient *</label>
+          <select id="appointmentPatient" required>
+            <option value="">Select a patient</option>
+          </select>
+        </div>
+        <div>
+          <label for="appointmentDate">Date *</label>
+          <input id="appointmentDate" type="date" required>
+        </div>
+        <div>
+          <label for="appointmentTime">Time *</label>
+          <input id="appointmentTime" type="time" required>
+        </div>
+        <div class="full">
+          <label for="appointmentReason">Reason for Visit *</label>
+          <input id="appointmentReason" maxlength="500" required
+            placeholder="Consultation, follow-up, etc.">
+        </div>
+        <button class="btn full" type="submit">+ Schedule Appointment</button>
+      </form>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Reason</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="appointmentTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>MediTrack · Medical Record Manager · College Project</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
